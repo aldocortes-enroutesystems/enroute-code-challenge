@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="no-data text-center" *ngIf="Employee.length == 0">
+    <p class="title-white">Loading...</p>
+    </div>
+
+    <div *ngIf="Employee.length !== 0">
+    <h3 class="mb-3 text-center title-white">Employees List</h3>
+
+    <div class="col-md-12">
+        <div class="table-actions">
+            You are in the page number {{this.currentPage}} of {{ this.maxPages}}
+        </div>
+        <table mat-table [dataSource]="Employee" class="mat-elevation-z8 centered">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Emp. #</th>
+                <td mat-cell *matCellDef="let element"> {{element.emp_no}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="lname">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="gender">
+                <th mat-header-cell *matHeaderCellDef> Gender </th>
+                <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="birth">
+                <th mat-header-cell *matHeaderCellDef> Birth Date </th>
+                <td mat-cell *matCellDef="let element"> {{datepipe.transform(element.birth_date, 'yyyy-MM-dd')}} &nbsp;</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="hire">
+                <th mat-header-cell *matHeaderCellDef> Hire Date </th>
+                <td mat-cell *matCellDef="let element">&nbsp; {{datepipe.transform(element.hire_date, 'yyyy-MM-dd')}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/employee/'+ row.emp_no"></tr>
+        </table>
+        <div class="table-actions">
+            <ng-container *ngIf="currentPage > 1">
+                <button 
+                    mat-raised-button 
+                    color="primary" 
+                    (click)="toggleNav(-1)">Prev</button>
+            </ng-container>
+            <ng-container *ngIf="currentPage < maxPages">
+                <button 
+                    mat-raised-button 
+                    color="accent" 
+                    (click)="toggleNav(1)">Next</button>
+            </ng-container>
+            
+        </div>
+    </div>
+</div>

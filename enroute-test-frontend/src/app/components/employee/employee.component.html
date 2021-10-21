@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="centered">
+        <h2 *ngIf="!employee">No employee found.</h2>
+        <mat-card *ngIf="employee">
+            <mat-card-title>{{employee.first_name}} {{employee.last_name}}</mat-card-title>
+            <mat-card-subtitle *ngIf="employee.dept_manager">{{employee.dept_manager}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="employee.dept_emp">{{employee.dept_emp}}</mat-card-subtitle>
+            <mat-card-content>
+                <ul>
+                    <li>Gender: {{employee.gender}}</li>
+                    <li>Salary: $ {{employee.salary}}</li>
+                    <li>Birth date: {{employee.birth_date}}</li>
+                    <li>Hire date: {{employee.hire_date}}</li>
+                </ul>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-button routerLink="/home">BACK</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
